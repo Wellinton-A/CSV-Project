@@ -45,8 +45,7 @@ class Item:
     def num_max_employee(self):
         key_list = list(dict_n_employee.keys())
         value_list = list(dict_n_employee.values())
-        max_dict = {key_list[value_list.index(
-            max(value_list))]: max(value_list)}
+        max_dict = {key_list[value_list.index(max(value_list))]: max(value_list)}
         return max_dict
 
     @classmethod
@@ -62,6 +61,15 @@ class Item:
     def __repr__(self):
         return f'Item({self.Index}, {self.Organization}, {self.Name}, {self.Website}, {self.Country}, {self.Founded}, {self.Description}, {self.Industry}, {self.Employees})'
 
+    @classmethod
+    def getting_uniques_industry(cls):
+        industry_set = set()
+        for i in Item.all:
+            industry_set.add(i.Industry)
+        unique_industry = list(industry_set)
+        return unique_industry
+
+
 
 Item.intance_from_csv()
 dict_n_employee = {}
@@ -70,3 +78,4 @@ print(Item.all)
 print(Item.num_max_employee())
 print(Item.sum_all())
 print(Item.num_industry())
+print(len(Item.getting_uniques_industry()))
